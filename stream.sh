@@ -6,9 +6,13 @@ mkdir cache
 while :
 do
     t=$(date --utc +%s)
+    old=$(readlink cache/recent)
     name=$(./get.sh $1)
-    length=$(./length.sh $(readlink cache/recent) )
+    new=$(readlink cache/recent)
+    length=$(./length.sh $new)
     echo "streaming $t"
-    cat $(readlink cache/recent) >> $target
+    if [ $old != $new ]; then
+        cat $(readlink cache/recent) >> $target
+    fi
     ./wait.sh $length $t
 done

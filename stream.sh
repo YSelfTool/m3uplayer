@@ -2,7 +2,7 @@
 test -z $1 && echo "missing master file" && exit 1
 target=$2
 test -z $2 && echo "missing video file, using default" && target="cache/merged.ts"
-mkdir cache
+mkdir -p cache
 while :
 do
     t=$(date --utc +%s)
